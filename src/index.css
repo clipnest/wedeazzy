@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-page: #FAF4EE;
+    --bg-surface: #FFFFFF;
+    --bg-blush: #F6ECE6;
+    --color-wine: #6B1124;
+    --color-wine-dark: #4A0A17;
+    --color-wine-hover: #530B1B;
+    --color-gold: #C59A58;
+    --color-gold-light: #E4C896;
+    --color-gold-glow: rgba(197, 154, 88, 0.25);
+    --text-primary: #24060E;
+    --text-muted: #695358;
+    --text-inverted: #FFFFFF;
+    --border-subtle: #EADBD2;
+    --border-gold: rgba(197, 154, 88, 0.35);
+  }
+
+  .dark {
+    --bg-page: #120509;
+    --bg-surface: #1E0C13;
+    --bg-blush: #2A101B;
+    --color-wine: #8C1C35;
+    --color-wine-dark: #580E1F;
+    --color-wine-hover: #A52642;
+    --color-gold: #D4A760;
+    --color-gold-light: #F0D4A0;
+    --color-gold-glow: rgba(212, 167, 96, 0.3);
+    --text-primary: #FAF4EE;
+    --text-muted: #BCA8AC;
+    --text-inverted: #120509;
+    --border-subtle: #3A1B26;
+    --border-gold: rgba(212, 167, 96, 0.35);
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, .font-serif-royal {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom Luxury Architectural Utilities */
+.arch-mask-hero {
+  border-top-left-radius: 200px;
+  border-bottom-right-radius: 40px;
+}
+
+@media (min-width: 1024px) {
+  .arch-mask-hero {
+    border-top-left-radius: 260px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 60px;
+  }
+}
+
+.gold-glow-subtle {
+  box-shadow: 0 8px 30px -4px rgba(107, 17, 36, 0.12), 0 0 16px rgba(197, 154, 88, 0.15);
+}
+
+.wine-glow-cta {
+  box-shadow: 0 10px 25px -4px rgba(107, 17, 36, 0.38), 0 0 12px rgba(197, 154, 88, 0.22);
+}
+
+.wine-glow-cta:hover {
+  box-shadow: 0 14px 30px -4px rgba(83, 11, 27, 0.5), 0 0 20px rgba(197, 154, 88, 0.35);
+}
+
+/* Filigree & Diamond Border Accents */
+.royal-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.royal-divider::before,
+.royal-divider::after {
+  content: "";
+  height: 1px;
+  width: 48px;
+  background: linear-gradient(90deg, transparent, #C59A58, transparent);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF4EE;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #120509;
+}
+::-webkit-scrollbar-thumb {
+  background: #C59A58;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6B1124;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #8C1C35;
+}
