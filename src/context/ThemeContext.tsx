@@ -12,29 +12,39 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
-    // Check localStorage first
-    const saved = localStorage.getItem('wedeazzy_theme') as Theme | null;
-    if (saved === 'dark' || saved === 'light') {
-      return saved;
-    }
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const saved = window.localStorage.getItem('wedeazzy_theme') as Theme | null;
+        if (saved === 'dark' || saved === 'light') {
+          return saved;
+        }
+      }
+      if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch {
+      // Ignore localStorage security/sandbox errors
     }
     return 'light';
   });
 
   useEffect(() => {
-    const root = document.documentElement;
-    const body = document.body;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      body.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-      body.classList.remove('dark');
+    try {
+      const root = document.documentElement;
+      const body = document.body;
+      if (theme === 'dark') {
+        root.classList.add('dark');
+        body.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+        body.classList.remove('dark');
+      }
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('wedeazzy_theme', theme);
+      }
+    } catch {
+      // Ignore storage errors
     }
-    localStorage.setItem('wedeazzy_theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
